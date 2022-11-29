@@ -9,32 +9,45 @@ both have a linear decision boundary
 both can learn iteratively, sample by sample (the Perceptron naturally, and Adaline via stochastic gradient descent)
 both use a threshold function
 Before we talk about the differences, let’s talk about the inputs first. The first step in the two algorithms is to compute the so-called net input z as the linear combination of our feature variables x and the model weights w.
+![image](https://user-images.githubusercontent.com/101083328/204425658-7004e7c5-e0a5-4a1e-b3b7-416732748aa0.png)
+
 
 Then, in the Perceptron and Adaline, we define a threshold function to make a prediction. I.e., if z is greater than a threshold theta, we predict class 1, and 0 otherwise:
+![image](https://user-images.githubusercontent.com/101083328/204425707-212c81e2-d5df-40ec-98c2-505b84695413.png)
+
 
 The differences between the Perceptron and Adaline
 the Perceptron uses the class labels to learn model coefficients
 Adaline uses continuous predicted values (from the net input) to learn the model coefficients, which is more “powerful” since it tells us by “how much” we were right or wrong
 So, in the perceptron, as illustrated below, we simply use the predicted class labels to update the weights, and in Adaline, we use a continuous response:
+![image](https://user-images.githubusercontent.com/101083328/204425878-64a20f66-3dc0-450f-a7be-2fd399d22dc1.png)
+
 (Note that I inserted the “activation function” in Adaline just for illustrative purposes; here, this activation function is simply the identity function) Both learning algorithms can actually be summarized by 4 simple steps – given that we use stochastic gradient descent for Adaline:
 Initialize the weights to 0 or small random numbers.
 For each training sample:
 Calculate the output value.
 Update the weights.
 We write the weight update in each iteration as:
-where Again, the “output” is the continuous net input value in Adaline and the predicted class label in case of the perceptron; eta is the learning rate. (In case you are interested: This weight update in Adaline is basically just taking the “opposite step” in direction of the sum-of-squared error cost gradient. I’ve a more detailed walkthrough here on deriving the cost gradient.
+![image](https://user-images.githubusercontent.com/101083328/204425982-44c7fb80-231f-42c2-a6e8-ad446f73c72d.png)
+
+where
+![image](https://user-images.githubusercontent.com/101083328/204426014-0a2e9d3d-c7ce-47fa-8852-5aa58a23e7a0.png)
+
+Again, the “output” is the continuous net input value in Adaline and the predicted class label in case of the perceptron; eta is the learning rate. (In case you are interested: This weight update in Adaline is basically just taking the “opposite step” in direction of the sum-of-squared error cost gradient. I’ve a more detailed walkthrough here on deriving the cost gradient.
 Multi-layer neural networks
 Although you haven’t asked about multi-layer neural networks specifically, let me add a few sentences about one of the oldest and most popular multi-layer neural network architectures: the Multi-Layer Perceptron (MLP). The term “Perceptron” is a little bit unfortunate in this context, since it really doesn’t have much to do with Rosenblatt’s Perceptron algorithm.
-
+![image](https://user-images.githubusercontent.com/101083328/204426047-deecafa5-9b84-43ea-b720-d3c9fa39fd9e.png)
 MLPs can basically be understood as a network of multiple artificial neurons over multiple layers. Here, the activation function is not linear (like in Adaline), but we use a non-linear activation function like the logistic sigmoid (the one that we use in logistic regression) or the hyperbolic tangent, or a piecewise-linear activation function such as the rectifier linear unit (ReLU). In addition, we often use a softmax function (a generalization of the logistic sigmoid for multi-class problems) in the output layer, and a threshold function to turn the predicted probabilities (by the softmax) into class labels.
 
 So, what the advantage of the MLP over the classic Perceptron and Adaline? By connecting the artificial neurons in this network through non-linear activation functions, we can create complex, non-linear decision boundaries that allow us to tackle problems where the different classes are not linearly separable.
 
 Let me show you an example :)
-![image](https://user-images.githubusercontent.com/101083328/204425331-f65f6532-3651-4224-8a82-ffaa01260ac3.png)
-![image](https://user-images.githubusercontent.com/101083328/204425347-13e2b2b2-a00b-461c-983d-ee5b3bef4ed8.png)
-![image](https://user-images.githubusercontent.com/101083328/204425361-08a0dfa9-dc6b-41e8-96ee-f1bd8fe41d1f.png)
 
+![image](https://user-images.githubusercontent.com/101083328/204425331-f65f6532-3651-4224-8a82-ffaa01260ac3.png)
+
+![image](https://user-images.githubusercontent.com/101083328/204425347-13e2b2b2-a00b-461c-983d-ee5b3bef4ed8.png)
+
+![image](https://user-images.githubusercontent.com/101083328/204425361-08a0dfa9-dc6b-41e8-96ee-f1bd8fe41d1f.png)
 Here’s the Python code if you want to reproduce these plots:
 from mlxtend.evaluate import plot_decision_regions
 from mlxtend.classifier import Perceptron
