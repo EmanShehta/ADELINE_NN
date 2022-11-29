@@ -43,10 +43,6 @@ So, what the advantage of the MLP over the classic Perceptron and Adaline? By co
 
 Let me show you an example :)
 
-![image](https://user-images.githubusercontent.com/101083328/204425331-f65f6532-3651-4224-8a82-ffaa01260ac3.png)
-
-![image](https://user-images.githubusercontent.com/101083328/204425347-13e2b2b2-a00b-461c-983d-ee5b3bef4ed8.png)
-
 ![image](https://user-images.githubusercontent.com/101083328/204425361-08a0dfa9-dc6b-41e8-96ee-f1bd8fe41d1f.png)
 Here’s the Python code if you want to reproduce these plots:
 from mlxtend.evaluate import plot_decision_regions
